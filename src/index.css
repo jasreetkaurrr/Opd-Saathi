@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 16px;
+    background-color: #F5F3EC;
+    color: #162824;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: rgba(28, 68, 61, 0.12);
+  }
+
+  html[data-text-size='normal'] {
+    font-size: 16px;
+  }
+
+  html[data-text-size='large'] {
+    font-size: 18px;
+  }
+
+  html[data-text-size='xlarge'] {
+    font-size: 20px;
+  }
+
+  body {
+    font-size: 1.125rem; /* >= 18px at normal, >= 20.25px at large, >= 22.5px at xlarge */
+    line-height: 1.5;
+    background-color: #F5F3EC;
+    color: #162824;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Unmistakable keyboard focus ring across every interactive control */
+  *:focus-visible {
+    outline: 3px solid #1C443D !important;
+    outline-offset: 3px !important;
+  }
+}
+
+/* Calm, tactile rounded hospital button (>= 56px tall) matching reference design */
+.tactile-btn {
+  min-height: 56px;
+  border-width: 1.5px;
+  box-shadow: 0 2px 6px rgba(22, 40, 36, 0.07);
+  transition: transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.tactile-btn:hover:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(22, 40, 36, 0.11);
+}
+
+.tactile-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(22, 40, 36, 0.08);
+}
+
+/* Soft calm card container */
+.calm-card {
+  background-color: #FCFBF7;
+  border: 1px solid #E5E1D5;
+  box-shadow: 0 8px 28px -6px rgba(24, 52, 46, 0.07), 0 2px 6px -1px rgba(24, 52, 46, 0.03);
+}
+
+/* Marching ants animated SVG route line */
+@keyframes routeMarch {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.route-path-animated {
+  stroke-dasharray: 8 6;
+  animation: routeMarch 0.9s linear infinite;
+}
+
+/* High Contrast Accessibility Mode (WCAG AAA) */
+html[data-contrast='high'],
+html[data-contrast='high'] body {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-contrast='high'] .hc-surface {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+html[data-contrast='high'] .hc-card,
+html[data-contrast='high'] .calm-card {
+  background-color: #0A0A0A !important;
+  color: #FFFFFF !important;
+  border-color: #FFE600 !important;
+  border-width: 2px !important;
+  box-shadow: none !important;
+}
+
+/* Ensure dark utility text inside hc-surface / hc-card flips to crisp white/yellow */
+html[data-contrast='high'] .hc-surface :is(h1, h2, h3, p, span, label, dt, dd, li, th, td):not(.hc-primary *),
+html[data-contrast='high'] .hc-card :is(h1, h2, h3, p, span, label, dt, dd, li, th, td):not(.hc-primary *) {
+  color: #FFFFFF !important;
+}
+
+html[data-contrast='high'] .hc-muted {
+  color: #FFE600 !important;
+}
+
+html[data-contrast='high'] input,
+html[data-contrast='high'] select,
+html[data-contrast='high'] textarea {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #FFE600 !important;
+  border-width: 3px !important;
+}
+
+html[data-contrast='high'] button:not(.hc-primary):not(.bg-urgent),
+html[data-contrast='high'] a.tactile-btn:not(.hc-primary):not(.bg-urgent) {
+  background-color: #121212 !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+html[data-contrast='high'] .hc-primary,
+html[data-contrast='high'] .hc-primary * {
+  background-color: #FFE600 !important;
+  color: #000000 !important;
+  border-color: #FFFFFF !important;
+}
+
+html[data-contrast='high'] .hc-primary svg {
+  background-color: transparent !important;
+  stroke: #000000 !important;
+}
+
+html[data-contrast='high'] .bg-urgent,
+html[data-contrast='high'] .bg-urgent * {
+  color: #FFFFFF !important;
+}
+
+html[data-contrast='high'] *:focus-visible {
+  outline: 4px solid #00FFFF !important;
+  outline-offset: 3px !important;
+}
+
+/* Clean Print Layout for OPD Slip */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 14pt !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .printable-slip {
+    box-shadow: none !important;
+    border: 2px solid #000000 !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}
